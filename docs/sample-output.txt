@@ -1,0 +1,14 @@
+39 findings. CVSS 7+ alone would put 23 in the urgent pile; risk-based ordering puts 6 there (P0 and P1).
+19 high-CVSS findings drop to P2/P3 (low exploitation, low exposure). 2 findings under CVSS 7 rise to P0/P1.
+
+tier score host            cve             cvss  epss kev why
+P0   100.0 db-core         CVE-2099-0025    7.8  0.62 yes known exploited, likely exploited soon, critical asset
+P0   100.0 vpn-gw          CVE-2099-0001    9.8  0.97 yes known exploited, internet-facing, likely exploited soon, critical asset
+P0   100.0 web-prod-01     CVE-2099-0002    8.1  0.94 yes known exploited, internet-facing, likely exploited soon, critical asset
+P0   100.0 web-prod-01     CVE-2099-0004    6.5  0.71 no  internet-facing, likely exploited soon, critical asset
+P0   100.0 web-prod-02     CVE-2099-0003    8.1  0.94 yes known exploited, internet-facing, likely exploited soon, critical asset
+P1    44.3 wiki            CVE-2099-0005    6.1  0.58 no  internet-facing, likely exploited soon
+P2    35.6 crm-app         CVE-2099-0014    9.8  0.02 no  critical asset
+P2    32.6 web-prod-01     CVE-2099-0027    5.9  0.02 no  internet-facing, critical asset
+P2    31.4 crm-app         CVE-2099-0015    8.8  0.01 no  critical asset
+P2    31.2 db-core         CVE-2099-0017    7.3  0.01 no  critical asset

@@ -1,0 +1,21 @@
+#!/usr/bin/env Rscript
+args <- commandArgs(trailingOnly = TRUE)
+script <- sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE)[1])
+root <- normalizePath(file.path(dirname(script), ".."))
+source(file.path(root, "R", "prioritize.R"))
+
+usage <- "usage: vuln-prioritizer <findings.csv> [--html] [--top N] [--fail-on-p0]\nExit: 0 ok, 1 P0 findings with --fail-on-p0, 2 bad input.\n"
+if (length(args) == 0 || startsWith(args[1], "-")) { cat(usage, file = stderr()); quit(status = 2) }
+html <- FALSE; fail <- FALSE; top <- NA_integer_
+i <- 2
+while (i <= length(args)) {
+  a <- args[i]
+  if (a == "--html") html <- TRUE
+  else if (a == "--fail-on-p0") fail <- TRUE
+  else if (a == "--top" && i < length(args) && grepl("^[0-9]+$", args[i + 1])) { top <- as.integer(args[i + 1]); i <- i + 1 }
+  else { cat("error: bad option", a, "\n", usage, file = stderr()); quit(status = 2) }
+  i <- i + 1
+}
+d <- tryCatch(prioritize(read_findings(args[1])), error = function(e) { cat("error:", conditionMessage(e), "\n", file = stderr()); quit(status = 2) })
+if (html) cat(render_html(d, if (is.na(top)) 15 else top)) else cat(render_text(d, if (is.na(top)) 10 else top))
+if (fail && any(d$tier == "P0")) quit(status = 1)
