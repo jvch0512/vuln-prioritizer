@@ -2,6 +2,8 @@
 
 A scanner that reports 3,000 findings with CVSS 7 or more is not a plan, it is a backlog nobody will clear. What decides which vulnerability hurts you is not the base score: it is whether it is being exploited, whether it faces the internet, and what it sits on. vuln-prioritizer takes your findings and puts them in an order you can defend.
 
+![Terminal demo of vuln-prioritizer on its sample data](docs/demo.svg)
+
 **Live demo:** https://jvch0512.github.io/vuln-prioritizer/ (a report on 39 synthetic findings with fictional CVE-2099 identifiers)
 
 R, base R only, no packages.
